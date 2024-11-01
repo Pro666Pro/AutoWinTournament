@@ -22,13 +22,9 @@ local Script = Window:MakeTab({
 	PremiumOnly = false
 })
 
-local Scripts = Script:AddSection({
-	Name = "Auto Win"
-})
-
-Scripts:AddToggle({
-	Name = "Turn On Auto Win Time",
-  Default = false,
+Script:AddToggle({
+	Name = "Auto Enter Tournament",
+  	Default = false,
 	Callback = function(Value)
 _G.AutoFarm = Value
 while _G.AutoFarm == true do
@@ -36,8 +32,20 @@ local args = {
     [1] = true
 }
 game:GetService("ReplicatedStorage").Events.Tournament.TournamentResponse:FireServer(unpack(args))
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace["Baseplate"].CFrame * CFrame.new(0,10,0)
-wait(0.1)
+wait(0.01)
 end
 	 end
 })
+
+Script:AddToggle({
+	Name = "Auto Teleport Safe Spot",
+  	Default = false,
+	Callback = function(Value)
+_G.AutoTeleport = Value
+while _G.AutoTeleport == true do
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace["Baseplate"].CFrame * CFrame.new(0,10,0)
+wait(0.01)
+end
+	 end
+})
+
